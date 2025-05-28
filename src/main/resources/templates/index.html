@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de Reservas</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Reservas del Hotel</h1>
+
+    <!-- Formulario para nueva reserva -->
+    <form th:action="@{/reservar}" th:object="${reserva}" method="post">
+        <label>Nombre:</label>
+        <input type="text" th:field="*{nombre}" required>
+
+        <label>Fecha:</label>
+        <input type="date" th:field="*{fecha}" required>
+
+        <label>Hora:</label>
+        <input type="time" th:field="*{hora}" required>
+
+        <label>Número de personas:</label>
+        <input type="number" th:field="*{personas}" required>
+
+        <button type="submit">Reservar</button>
+    </form>
+
+    <hr>
+
+    <!-- Lista de reservas -->
+    <h2>Reservas existentes</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Personas</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="r : ${reservas}">
+            <td th:text="${r.nombre}"></td>
+            <td th:text="${r.fecha}"></td>
+            <td th:text="${r.hora}"></td>
+            <td th:text="${r.personas}"></td>
+            <td><a th:href="@{'/eliminar/' + ${r.id}}">Eliminar</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
