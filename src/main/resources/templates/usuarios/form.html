@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Crear Usuario - Mundo Mascotas</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+<div th:fragment="navbar">
+  <nav style="background-color:#4a90e2; padding: 15px;">
+    <a th:href="@{/}" style="color: white; margin-right: 20px;">Reservas</a>
+    <a th:href="@{/usuarios}" style="color: white; margin-right: 20px;">Usuarios</a>
+    <a th:href="@{/servicios}" style="color: white; margin-right: 20px;">Servicios</a>
+  </nav>
+</div>
+<div class="container">
+  <h1 th:text="${usuario.idUsuario == null} ? 'Crear Usuario' : 'Editar Usuario'">Formulario Usuario</h1>
+
+  <form th:action="@{/usuarios/guardar}" th:object="${usuario}" method="post">
+    <input type="hidden" th:field="*{idUsuario}" />
+
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" th:field="*{nombre}" required />
+
+    <label for="correo">Correo:</label>
+    <input type="email" id="correo" th:field="*{correo}" required />
+
+    <label for="contraseña">Contraseña:</label>
+    <input type="password" id="contraseña" th:field="*{contraseña}" required />
+
+    <label for="tipoUsuario">Tipo de Usuario:</label>
+    <select id="tipoUsuario" th:field="*{tipoUsuario}">
+      <option th:each="tipo : ${T(com.example.mundomascota.entity.Usuario.TipoUsuario).values()}"
+              th:value="${tipo}" th:text="${tipo}">Tipo</option>
+    </select>
+
+    <button type="submit">Guardar</button>
+    <a href="/usuarios"><button type="button">Cancelar</button></a>
+  </form>
+</div>
+</body>
+</html>

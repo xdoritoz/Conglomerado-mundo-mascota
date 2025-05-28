@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Crear Servicio - Mundo Mascotas</title>
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<div th:fragment="navbar">
+    <nav style="background-color:#4a90e2; padding: 15px;">
+        <a th:href="@{/}" style="color: white; margin-right: 20px;">Reservas</a>
+        <a th:href="@{/usuarios}" style="color: white; margin-right: 20px;">Usuarios</a>
+        <a th:href="@{/servicios}" style="color: white; margin-right: 20px;">Servicios</a>
+    </nav>
+</div>
+<div class="container">
+
+    <h1 th:text="${servicio.idServicio == null} ? 'Crear Servicio' : 'Editar Servicio'">Formulario Servicio</h1>
+
+    <form th:action="@{/servicios/guardar}" th:object="${servicio}" method="post">
+        <input type="hidden" th:field="*{idServicio}" />
+
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" th:field="*{nombre}" required />
+
+        <label for="segmento">Segmento:</label>
+        <select id="segmento" th:field="*{segmento}">
+            <option value="CLINICA">Clínica</option>
+            <option value="HOTEL">Hotel</option>
+            <option value="SPA">Spa</option>
+        </select>
+
+        <label for="subRubro">Sub-rubro:</label>
+        <input type="text" id="subRubro" th:field="*{subRubro}" required />
+
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio" th:field="*{precio}" step="0.01" required />
+
+        <button type="submit">Guardar</button>
+        <a href="/servicios"><button type="button">Cancelar</button></a>
+    </form>
+</div>
+</body>
+</html>

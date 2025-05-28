@@ -6,7 +6,13 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-
+<div th:fragment="navbar">
+    <nav style="background-color:#4a90e2; padding: 15px;">
+        <a th:href="@{/}" style="color: white; margin-right: 20px;">Reservas</a>
+        <a th:href="@{/usuarios}" style="color: white; margin-right: 20px;">Usuarios</a>
+        <a th:href="@{/servicios}" style="color: white; margin-right: 20px;">Servicios</a>
+    </nav>
+</div>
 <div class="container">
     <h1>Reservas del Hotel</h1>
 

@@ -1,0 +1,13 @@
+<!-- templates/fragments/navbar.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="navbar">
+    <nav style="background-color:#4a90e2; padding: 15px;">
+        <a th:href="@{/reserva}" style="color: white; margin-right: 20px;">Reservas</a>
+        <a th:href="@{/usuarios}" style="color: white; margin-right: 20px;">Usuarios</a>
+        <a th:href="@{/servicios}" style="color: white; margin-right: 20px;">Servicios</a>
+    </nav>
+</div>
+</body>
+</html>
