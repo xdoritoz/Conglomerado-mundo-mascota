@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReservaService {
@@ -23,5 +24,9 @@ public class ReservaService {
 
     public void eliminar(Long id) {
         reservaRepository.deleteById(id);
+    }
+
+    public Optional<Reserva> buscarPorId(Long id) {
+        return reservaRepository.findById(id);
     }
 }

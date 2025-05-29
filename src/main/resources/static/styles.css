@@ -1,90 +1,179 @@
-/* styles.css */
+/* style.css */
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f9f9f9;
+    background-color: #f5f7fa;
     color: #333;
-    margin: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
 h1, h2 {
-    font-weight: 600;
     color: #222;
+    margin-bottom: 25px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
 }
 
-form {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 400px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    margin-bottom: 30px;
-}
-
-label {
+form label {
+    font-weight: 600;
     display: block;
-    margin-top: 15px;
-    font-weight: 500;
+    margin-top: 18px;
+    margin-bottom: 6px;
+    color: #555;
 }
 
-input, button {
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+select {
     width: 100%;
-    padding: 10px;
-    margin-top: 6px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+    padding: 12px 15px;
+    border: 1.8px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
     box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: inherit;
 }
 
-input:focus {
-    border-color: #007BFF;
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+select:focus {
     outline: none;
+    border-color: #3a86ff;
+    box-shadow: 0 0 8px #3a86ff66;
 }
 
 button {
-    margin-top: 20px;
-    background-color: #007BFF;
+    margin-top: 30px;
+    background-color: #3a86ff;
     color: white;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 8px;
+    font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
-    border: none;
     transition: background-color 0.3s ease;
+    font-family: inherit;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #265ecc;
+}
+
+a.btn {
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 8px;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
+    font-family: inherit;
+}
+
+a.btn-primary {
+    background-color: #3a86ff;
+    color: white;
+}
+
+a.btn-primary:hover {
+    background-color: #265ecc;
+}
+
+a.btn-cancel {
+    background-color: #888;
+    color: white;
+}
+
+a.btn-cancel:hover {
+    background-color: #555;
+}
+
+a.btn-edit {
+    background-color: #ffbe0b;
+    color: #333;
+    padding: 6px 14px;
+    font-size: 0.9rem;
+}
+
+a.btn-edit:hover {
+    background-color: #e0a800;
+}
+
+a.btn-delete {
+    background-color: #ff4b4b;
+    color: white;
+    padding: 6px 14px;
+    font-size: 0.9rem;
+}
+
+a.btn-delete:hover {
+    background-color: #d73737;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-top: 25px;
 }
 
-th, td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #ddd;
-    text-align: left;
-}
-
-th {
-    background-color: #007BFF;
+thead tr {
+    background-color: #3a86ff;
     color: white;
 }
 
-tr:hover {
-    background-color: #f1f1f1;
+thead th {
+    padding: 14px;
+    text-align: left;
+    font-weight: 700;
 }
 
-a {
-    color: #007BFF;
+tbody td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle;
+}
+
+tbody tr:hover {
+    background-color: #f1f9ff;
+}
+
+.navbar {
+    background-color: #3a86ff;
+    padding: 12px 40px;
+    display: flex;
+    gap: 24px;
+}
+
+.navbar a {
+    color: white;
+    font-weight: 600;
     text-decoration: none;
+    font-size: 1rem;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
 }
 
-a:hover {
-    text-decoration: underline;
+.navbar a:hover {
+    background-color: #265ecc;
+}
+
+.navbar a.active {
+    background-color: #265ecc;
 }

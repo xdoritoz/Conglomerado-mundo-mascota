@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lista de Reservas - Mundo Mascota</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="/" class="">Inicio</a>
+  <a href="/reservas/nuevo" class="">Nueva Reserva</a>
+  <a href="/reservas" class="active">Listado de Reservas</a>
+  <!-- Agrega otros enlaces aquí si los tienes -->
+</nav>
+
+<div class="container">
+  <h1>Reservas Registradas</h1>
+
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre Cliente</th>
+      <th>Fecha</th>
+      <th>Hora</th>
+      <th>Servicio</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Recorrer la lista de reservas -->
+    <tr th:each="reserva : ${reservas}">
+      <td th:text="${reserva.id}">1</td>
+      <td th:text="${reserva.nombreCliente}">Juan Pérez</td>
+      <td th:text="${reserva.fecha}">2025-05-28</td>
+      <td th:text="${reserva.hora}">10:30</td>
+      <td th:text="${reserva.servicio}">Baño</td>
+      <td>
+        <a th:href="@{/reservas/editar/{id}(id=${reserva.id})}" class="btn btn-edit">Editar</a>
+        <a th:href="@{/reservas/eliminar/{id}(id=${reserva.id})}" class="btn btn-delete"
+           onclick="return confirm('¿Seguro que quieres eliminar esta reserva?');">Eliminar</a>
+      </td>
+    </tr>
+    <!-- Si no hay reservas -->
+    <tr th:if="${#lists.isEmpty(reservas)}">
+      <td colspan="6">No hay reservas registradas.</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

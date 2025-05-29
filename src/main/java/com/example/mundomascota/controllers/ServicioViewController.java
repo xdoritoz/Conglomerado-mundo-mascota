@@ -2,8 +2,10 @@ package com.example.mundomascota.controllers;
 
 import com.example.mundomascota.entity.Servicio;
 import com.example.mundomascota.services.ServicioService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -36,10 +38,16 @@ public class ServicioViewController {
     }
 
     @PostMapping("/guardar")
-    public String guardarServicio(@ModelAttribute("servicio") Servicio servicio) {
+    public String guardarServicio(@Valid @ModelAttribute("servicio") Servicio servicio,
+                                  BindingResult result,
+                                  Model model) {
+        if (result.hasErrors()) {
+            return "servicios/form";
+        }
         servicioService.save(servicio);
         return "redirect:/servicios";
     }
+
 
     @GetMapping("/eliminar/{id}")
     public String eliminarServicio(@PathVariable Long id) {

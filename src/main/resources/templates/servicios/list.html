@@ -1,47 +1,45 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
 <head>
-  <title>Lista de Servicios</title>
+  <meta charset="UTF-8" />
+  <title>Listado de Servicios - Mundo Mascotas</title>
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
-<div th:fragment="navbar">
-  <nav style="background-color:#4a90e2; padding: 15px;">
-    <a th:href="@{/}" style="color: white; margin-right: 20px;">Reservas</a>
-    <a th:href="@{/usuarios}" style="color: white; margin-right: 20px;">Usuarios</a>
-    <a th:href="@{/servicios}" style="color: white; margin-right: 20px;">Servicios</a>
-  </nav>
+<nav style="background-color:#4a90e2; padding: 15px;">
+  <a th:href="@{/}" style="color: white; margin-right: 20px;">Reservas</a>
+  <a th:href="@{/usuarios}" style="color: white; margin-right: 20px;">Usuarios</a>
+  <a th:href="@{/servicios}" style="color: white; margin-right: 20px;">Servicios</a>
+</nav>
+
+<div class="container">
+  <h1>Listado de Servicios</h1>
+  <a href="/servicios/nuevo" class="btn btn-primary">Nuevo Servicio</a>
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre Servicio</th>
+      <th>Descripción</th>
+      <th>Precio</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="servicio : ${servicios}">
+      <td th:text="${servicio.idServicio}"></td>
+      <td th:text="${servicio.nombre}"></td>
+      <td th:text="${servicio.descripcion}"></td>
+      <td th:text="${servicio.precio}"></td>
+      <td>
+        <a th:href="@{'/servicios/editar/' + ${servicio.idServicio}}" class="btn btn-edit">Editar</a>
+        <a th:href="@{'/servicios/eliminar/' + ${servicio.idServicio}}"
+           onclick="return confirm('¿Seguro que desea eliminar este servicio?')"
+           class="btn btn-delete">Eliminar</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>
-<h1>Servicios</h1>
-
-<a th:href="@{/servicios/nuevo}" class="button">+ Nuevo Servicio</a>
-
-<table>
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>Nombre</th>
-    <th>Descripción</th>
-    <th>Precio</th>
-    <th>Segmento</th>
-    <th>Acciones</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="servicio : ${servicios}">
-    <td th:text="${servicio.id}"></td>
-    <td th:text="${servicio.nombre}"></td>
-    <td th:text="${servicio.descripcion}"></td>
-    <td th:text="${servicio.precio}"></td>
-    <td th:text="${servicio.segmento}"></td>
-    <td>
-      <a th:href="@{'/servicios/editar/' + ${servicio.id}}">Editar</a>
-      |
-      <a th:href="@{'/servicios/eliminar/' + ${servicio.id}}"
-         onclick="return confirm('¿Estás seguro de eliminar este servicio?')">Eliminar</a>
-    </td>
-  </tr>
-  </tbody>
-</table>
 </body>
 </html>

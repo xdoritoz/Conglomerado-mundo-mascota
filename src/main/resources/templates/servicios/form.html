@@ -1,43 +1,60 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>Crear Servicio - Mundo Mascotas</title>
+    <title th:text="${servicio.idServicio} == null ? 'Nuevo Servicio' : 'Editar Servicio'">Formulario Servicio</title>
     <link rel="stylesheet" href="/css/style.css" />
+    <style>
+        .error { color: red; font-size: 0.9em; }
+        label { display: block; margin-top: 15px; }
+        input, select { width: 100%; padding: 8px; margin-top: 5px; }
+    </style>
 </head>
 <body>
-<div th:fragment="navbar">
-    <nav style="background-color:#4a90e2; padding: 15px;">
-        <a th:href="@{/}" style="color: white; margin-right: 20px;">Reservas</a>
-        <a th:href="@{/usuarios}" style="color: white; margin-right: 20px;">Usuarios</a>
-        <a th:href="@{/servicios}" style="color: white; margin-right: 20px;">Servicios</a>
-    </nav>
-</div>
-<div class="container">
+<nav style="background-color:#4a90e2; padding: 15px;">
+    <a th:href="@{/}" style="color: white; margin-right: 20px;">Reservas</a>
+    <a th:href="@{/usuarios}" style="color: white; margin-right: 20px;">Usuarios</a>
+    <a th:href="@{/servicios}" style="color: white; margin-right: 20px;">Servicios</a>
+</nav>
 
-    <h1 th:text="${servicio.idServicio == null} ? 'Crear Servicio' : 'Editar Servicio'">Formulario Servicio</h1>
+<div class="container" style="max-width: 600px; margin: auto;">
+    <h1 th:text="${servicio.idServicio} == null ? 'Crear Nuevo Servicio' : 'Editar Servicio'"></h1>
 
     <form th:action="@{/servicios/guardar}" th:object="${servicio}" method="post">
-        <input type="hidden" th:field="*{idServicio}" />
 
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" th:field="*{nombre}" required />
+        <!-- Campo: Nombre -->
+        <label for="nombre">Nombre del Servicio</label>
+        <input type="text" id="nombre" th:field="*{nombre}" placeholder="Nombre del servicio" required />
+        <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="error"></div>
 
-        <label for="segmento">Segmento:</label>
-        <select id="segmento" th:field="*{segmento}">
-            <option value="CLINICA">Clínica</option>
-            <option value="HOTEL">Hotel</option>
-            <option value="SPA">Spa</option>
+        <!-- Campo: Descripción -->
+        <label for="descripcion">Descripción</label>
+        <input type="text" id="descripcion" th:field="*{descripcion}" placeholder="Descripción breve" />
+        <div th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}" class="error"></div>
+
+        <!-- Campo: Precio -->
+        <label for="precio">Precio</label>
+        <input type="number" id="precio" th:field="*{precio}" placeholder="Precio en USD" min="0" step="0.01" required />
+        <div th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}" class="error"></div>
+
+        <!-- Campo: Segmento -->
+        <label for="segmento">Segmento</label>
+        <select id="segmento" th:field="*{segmento}" required>
+            <option value="" disabled th:selected="*{segmento} == null">--Seleccione--</option>
+            <option th:value="CLINICA" th:text="'Clínica'"></option>
+            <option th:value="HOTEL" th:text="'Hotel'"></option>
+            <option th:value="SPA" th:text="'Spa'"></option>
         </select>
+        <div th:if="${#fields.hasErrors('segmento')}" th:errors="*{segmento}" class="error"></div>
 
-        <label for="subRubro">Sub-rubro:</label>
-        <input type="text" id="subRubro" th:field="*{subRubro}" required />
+        <!-- Campo: Sub Rubro -->
+        <label for="subRubro">Sub Rubro (opcional)</label>
+        <input type="text" id="subRubro" th:field="*{subRubro}" placeholder="Ej: Vacunación, Estética, etc." />
+        <div th:if="${#fields.hasErrors('subRubro')}" th:errors="*{subRubro}" class="error"></div>
 
-        <label for="precio">Precio:</label>
-        <input type="number" id="precio" th:field="*{precio}" step="0.01" required />
-
-        <button type="submit">Guardar</button>
-        <a href="/servicios"><button type="button">Cancelar</button></a>
+        <!-- Botones -->
+        <button type="submit" style="margin-top: 20px;">Guardar</button>
+        <a href="/servicios" class="btn btn-cancel" style="margin-left: 10px;">Cancelar</a>
     </form>
 </div>
 </body>
