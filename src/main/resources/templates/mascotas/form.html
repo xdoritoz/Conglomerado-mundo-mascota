@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${mascota.idMascota} == null ? 'Registrar nueva mascota' : 'Editar mascota'">Formulario Mascota</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div th:fragment="navbar">
+    <nav style="background-color:#4a90e2; padding: 15px;">
+        <a th:href="@{/}" style="color: white; margin-right: 20px;">Reservas</a>
+        <a th:href="@{/usuarios}" style="color: white; margin-right: 20px;">Usuarios</a>
+        <a th:href="@{/servicios}" style="color: white; margin-right: 20px;">Servicios</a>
+        <a th:href="@{/mascotas}" style="color: white; margin-right: 20px;">mascotas</a>
+        <a th:href="@{/clientes}" style="color: white; margin-right: 20px;">Clientes</a>
+    </nav>
+</div>
+
+<div class="container">
+    <h2 th:text="${mascota.idMascota} == null ? 'Registrar nueva mascota' : 'Editar mascota'"></h2>
+
+    <form th:action="@{/mascotas/guardar}" th:object="${mascota}" method="post">
+        <input type="hidden" th:field="*{idMascota}" />
+
+        <label>Nombre:</label>
+        <input type="text" th:field="*{nombre}" required />
+        <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="error"></div>
+
+        <label>Especie:</label>
+        <input type="text" th:field="*{especie}" required />
+        <div th:if="${#fields.hasErrors('especie')}" th:errors="*{especie}" class="error"></div>
+
+        <label>Raza:</label>
+        <input type="text" th:field="*{raza}" required />
+        <div th:if="${#fields.hasErrors('raza')}" th:errors="*{raza}" class="error"></div>
+
+        <label>Edad:</label>
+        <input type="number" th:field="*{edad}" min="0" required />
+        <div th:if="${#fields.hasErrors('edad')}" th:errors="*{edad}" class="error"></div>
+
+        <label>Peso:</label>
+        <input type="number" th:field="*{peso}" min="0" step="0.1" required />
+        <div th:if="${#fields.hasErrors('peso')}" th:errors="*{peso}" class="error"></div>
+
+        <label>Dueño:</label>
+        <select th:field="*{cliente.idCliente}" required>
+            <option value="" disabled>-- Seleccione un dueño --</option>
+            <option th:each="c : ${clientes}"
+                    th:value="${c.idCliente}"
+                    th:text="${c.nombre + ' ' + c.apellido}">Dueño</option>
+        </select>
+        <div th:if="${#fields.hasErrors('cliente.idCliente')}" th:errors="*{cliente.idCliente}" class="error"></div>
+
+        <button type="submit">Guardar</button>
+        <a th:href="@{/mascotas}" class="btn btn-cancel">Cancelar</a>
+    </form>
+</div>
+</body>
+</html>

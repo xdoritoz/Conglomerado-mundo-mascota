@@ -1,6 +1,7 @@
 package com.example.mundomascota.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -29,7 +30,11 @@ public class Mascota {
     @Min(0)
     private Integer edad;
 
+    @DecimalMin("0.0")
+    private double peso;
+
     @ManyToOne @JoinColumn(name = "id_cliente", nullable = false)
     private Cliente cliente;
+
 
 }

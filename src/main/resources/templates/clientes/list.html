@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Clientes</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div th:fragment="navbar">
+    <nav style="background-color:#4a90e2; padding: 15px;">
+        <a th:href="@{/}" style="color: white; margin-right: 20px;">Reservas</a>
+        <a th:href="@{/usuarios}" style="color: white; margin-right: 20px;">Usuarios</a>
+        <a th:href="@{/servicios}" style="color: white; margin-right: 20px;">Servicios</a>
+        <a th:href="@{/mascotas}" style="color: white; margin-right: 20px;">mascotas</a>
+        <a th:href="@{/clientes}" style="color: white; margin-right: 20px;">Clientes</a>
+    </nav>
+</div>
+
+<div class="container">
+    <h1>Clientes</h1>
+    <a th:href="@{/clientes/nuevo}" class="btn btn-primary">Nuevo Cliente</a>
+
+    <div th:if="${exito}" class="alert alert-success" th:text="${exito}"></div>
+    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Nombre</th><th>Apellido</th><th>Documento</th>
+            <th>Dirección</th><th>Teléfono</th><th>Correo</th><th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="c : ${clientes}">
+            <td th:text="${c.nombre}"></td>
+            <td th:text="${c.apellido}"></td>
+            <td th:text="${c.documento}"></td>
+            <td th:text="${c.direccion}"></td>
+            <td th:text="${c.telefono}"></td>
+            <td th:text="${c.correo}"></td>
+            <td>
+                <a th:href="@{/clientes/editar/{id}(id=${c.idCliente})}" class="btn btn-edit">Editar</a>
+                <a th:href="@{/clientes/eliminar/{id}(id=${c.idCliente})}" class="btn btn-delete"
+                   onclick="return confirm('¿Eliminar este cliente?');">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -11,11 +11,15 @@
     </style>
 </head>
 <body>
-<nav style="background-color:#4a90e2; padding: 15px;">
-    <a th:href="@{/}" style="color: white; margin-right: 20px;">Reservas</a>
-    <a th:href="@{/usuarios}" style="color: white; margin-right: 20px;">Usuarios</a>
-    <a th:href="@{/servicios}" style="color: white; margin-right: 20px;">Servicios</a>
-</nav>
+<div th:fragment="navbar">
+    <nav style="background-color:#4a90e2; padding: 15px;">
+        <a th:href="@{/}" style="color: white; margin-right: 20px;">Reservas</a>
+        <a th:href="@{/usuarios}" style="color: white; margin-right: 20px;">Usuarios</a>
+        <a th:href="@{/servicios}" style="color: white; margin-right: 20px;">Servicios</a>
+        <a th:href="@{/mascotas}" style="color: white; margin-right: 20px;">mascotas</a>
+        <a th:href="@{/clientes}" style="color: white; margin-right: 20px;">Clientes</a>
+    </nav>
+</div>
 
 <div class="container" style="max-width: 600px; margin: auto;">
     <h1 th:text="${servicio.idServicio} == null ? 'Crear Nuevo Servicio' : 'Editar Servicio'"></h1>

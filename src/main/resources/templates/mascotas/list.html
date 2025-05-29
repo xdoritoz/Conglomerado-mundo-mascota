@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Mascotas</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div th:fragment="navbar">
+    <nav style="background-color:#4a90e2; padding: 15px;">
+        <a th:href="@{/}" style="color: white; margin-right: 20px;">Reservas</a>
+        <a th:href="@{/usuarios}" style="color: white; margin-right: 20px;">Usuarios</a>
+        <a th:href="@{/servicios}" style="color: white; margin-right: 20px;">Servicios</a>
+        <a th:href="@{/mascotas}" style="color: white; margin-right: 20px;">mascotas</a>
+        <a th:href="@{/clientes}" style="color: white; margin-right: 20px;">Clientes</a>
+    </nav>
+</div>
+
+<div class="container">
+    <h1>Listado de Mascotas</h1>
+    <a th:href="@{/mascotas/nuevo}" class="btn btn-primary">Registrar Nueva Mascota</a>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Nombre</th><th>Especie</th><th>Raza</th>
+            <th>Edad</th><th>Peso</th><th>Dueño</th><th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="m : ${mascotas}">
+            <td th:text="${m.nombre}"></td>
+            <td th:text="${m.especie}"></td>
+            <td th:text="${m.raza}"></td>
+            <td th:text="${m.edad}"></td>
+            <td th:text="${m.peso}"></td>
+            <td th:text="${m.cliente.nombre + ' ' + m.cliente.apellido}"></td>
+            <td>
+                <a th:href="@{'/mascotas/editar/' + ${m.idMascota}}" class="btn btn-edit">Editar</a>
+                <a th:href="@{'/mascotas/eliminar/' + ${m.idMascota}}" class="btn btn-delete"
+                   onclick="return confirm('¿Eliminar esta mascota?');">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
